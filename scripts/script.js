@@ -35,11 +35,11 @@ function removeVideoStream (evt) {
 }
 
 function addCanvas(streamId){
+  let video=document.getElementById(`video${streamId}`);
   let canvas=document.createElement("canvas");
-  canvas.id='canvas'+streamId;
+  // canvas.id='canvas'+streamId;
   canvasContainer.appendChild(canvas);
   let ctx = canvas.getContext('2d');
-  let video=document.getElementById(`video${streamId}`);
 
   video.addEventListener('loadedmetadata', function() {
       canvas.width = video.videoWidth;
@@ -50,6 +50,10 @@ function addCanvas(streamId){
       var $this = this; //cache
       (function loop() {
           if (!$this.paused && !$this.ended) {
+            if($this.windows!==canvas.width){
+              canvas.width = $this.videoWidth;
+              canvas.height = $this.videoHeight;
+            }
               ctx.drawImage($this, 0, 0);
               setTimeout(loop, 1000 / 30); // drawing at 30fps
           }
@@ -57,51 +61,40 @@ function addCanvas(streamId){
   }, 0);
 }
 
-// Client Setup
-// Defines a client for RTC
 let client = AgoraRTC.createClient({
   mode: 'live',
   codec: "h264"
 });
 
-// Client Setup
-// Defines a client for Real Time Communication
-client.init("99ccc83bcecf449db0a24ae76327c7b7",() => console.log("AgoraRTC client initialized") ,handleFail);
+client.init("99ccc83bcecf449db0a24ae76327c7b7",()=>console.log("AgoraRTC client initialized"));
 
-// The client joins the channel
-client.join(null,"any-channel",null, (uid)=>{
+client.join(null,"demo",null, (uid)=>{
 
-  // Stream object associated with your web cam is initialized
   let localStream = AgoraRTC.createStream({
-      streamID: uid,
+      streamID:uid,
       audio: true,
       video: true,
       screen: false
   });
 
-  // Associates the stream to the client
   localStream.init(function() {
 
-      //Plays the localVideo
       localStream.play('me');
 
-      //Publishes the stream to the channel
       client.publish(localStream, handleFail);
 
-  },handleFail);
 
-},handleFail);
-//When a stream is added to a channel
 client.on('stream-added', function (evt) {
   client.subscribe(evt.stream, handleFail);
 });
-//When you subscribe to a stream
 client.on('stream-subscribed', function (evt) {
   let stream = evt.stream;
   addVideoStream(stream.getId());
   stream.play(stream.getId());
   addCanvas(stream.getId());
 });
-//When a person is removed from the stream
 client.on('stream-removed',removeVideoStream);
 client.on('peer-leave',removeVideoStream);
+},handleFail);
+
+},handleFail);
