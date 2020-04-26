@@ -12,23 +12,26 @@
   <link href="styles/bootstrap.min.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
 
+  <script src="scripts/AgoraRTCSDK-3.0.2.js"></script>
+  <script src="scripts/jquery.js"></script>
 </head>
 
 <body id="page-top">
-  <header class="masthead">
+  <header class="masthead" id="first">
     <div class="container h-100">
       <div class="row h-100">
         <div class="col-lg-7 my-auto">
           <div class="header-content mx-auto">
             <h1 class="mb-5">Make A Free Video Call</h1>
-            <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Join For Free</a>
+            <h5 class="mb-5">Made with Agora.io</h5>
+            <a  href="page.html" id="toggleVideo" data-toggle="collapse" class="btn btn-outline btn-xl js-scroll-trigger">Join For Free</a>
           </div>
         </div>
         <div class="col-lg-5 my-auto">
           <div class="device-container">
-            <div class="device-mockup iphone6_plus portrait white">
-              <div class="device">
-                <div class="screen">
+            <div>
+              <div>
+                <div>
                   <img src="img/pic.png" class="img-fluid" alt="">
                 </div>
                 <div class="button">
