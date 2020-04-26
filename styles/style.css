@@ -7,6 +7,12 @@ body {
 body {
   font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
 }
+*{
+  font-family: sans-serif;
+}
+h1,h4{
+  text-align: center;
+}
 #remote-container video{
   height: auto;
   position: relative !important;
@@ -31,8 +37,8 @@ header.masthead {
   padding-top: 150px;
   padding-bottom: 100px;
   color: white;
-  background: url("../img/bg-pattern.png"), #7b4397;
-  background: url("../img/bg-pattern.png"), linear-gradient(to left, #7b4397, #dc2430);
+  background: #7b4397;
+  background: linear-gradient(to left, #7b4397, #dc2430);
 }
 
 header.masthead .header-content {
