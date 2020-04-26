@@ -7,6 +7,23 @@ body {
 body {
   font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
 }
+#remote-container video{
+  height: auto;
+  position: relative !important;
+}
+#me{
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}
+#me video{
+  position: relative !important;
+}
+#remote-container{
+  display: flex;
+}
+
 
 header.masthead {
   position: relative;
@@ -80,3 +97,4 @@ header.masthead .device-container .screen img {
   font-size: 11px;
   padding: 15px 45px;
 }
+
